@@ -6,12 +6,13 @@ public class myFirstProgramm {
     hello("user");
     hello("Maria");
 
-    double l = 5;
-    System.out.println("Площадь квардрата со стороной " + l + " = " + area(l));
+    Square s = new Square(5);
+       System.out.println("Площадь квардрата со стороной " + s.l + " = " + s.area());
 
-    double a = 4;
-    double b = 6;
-    System.out.println("Площадь прямоугольника с сторонами " + a + " и " + b + " = " + area(a, b));
+
+    Rectangle r = new Rectangle(3, 5);
+
+        System.out.println("Площадь прямоугольника с сторонами " + r.a + " и " + r.b + " = " + r.area());
   }
 
 
@@ -20,13 +21,9 @@ public class myFirstProgramm {
   }
 
 
-  public static double area(double len) {
-    return len * len;
-  }
 
-  public static double area(double a, double b) {
-    return a * b;
-  }
+
+
 
 }
 
