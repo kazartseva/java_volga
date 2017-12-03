@@ -2,8 +2,8 @@ package it.java.task2;
 
 public class task2 {
   public static void main(String[] args) {
-    Point p1 = new Point(2,2);
-    Point p2 = new Point(10,4);
+    Point p1 = new Point(8,21);
+    Point p2 = new Point(1,-3);
 
     System.out.println("Расстояние между точками с координатами (" + p1.x + "," + p2.y + ") и (" + p2.x + "," + p2.y + ") = " + distance(p1, p2));
 
