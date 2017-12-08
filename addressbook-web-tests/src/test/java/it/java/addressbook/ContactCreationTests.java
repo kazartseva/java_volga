@@ -38,8 +38,7 @@ public class ContactCreationTests {
     fillContactForm(new ContactData("Gabriele", "Salvatores", "Cinema", "+3923658974", "email@test.it"));
     submitContactCreation();
     gotoHome();
-    wd.findElement(By.name("searchstring")).click();
-    wd.findElement(By.name("searchstring")).sendKeys("\\18");
+
   }
 
   private void gotoHome() {
