@@ -12,6 +12,7 @@ public class ApplicationManager {
   FirefoxDriver wd;
   private GroupHelper groupHelper = new GroupHelper(wd);
   private ContactHelper contactHelper = new ContactHelper(wd);
+  private NavigationHelper navigationHelper= new NavigationHelper(wd);
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
     try {
@@ -22,6 +23,7 @@ public class ApplicationManager {
     }
   }
 
+
   public void init() {
 
     wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
@@ -29,6 +31,7 @@ public class ApplicationManager {
     wd.get("http://localhost/addressbook/index.php");
     groupHelper = new GroupHelper(wd);
     contactHelper = new ContactHelper(wd);
+    navigationHelper = new NavigationHelper(wd);
     login("admin", "secret");
   }
 
@@ -52,5 +55,9 @@ public class ApplicationManager {
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }
