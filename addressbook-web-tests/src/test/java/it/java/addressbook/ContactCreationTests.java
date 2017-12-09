@@ -1,21 +1,21 @@
 package it.java.addressbook;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
 
 public class ContactCreationTests {
   FirefoxDriver wd;
 
   @BeforeMethod
   public void setUp() throws Exception {
-    wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("/Applications/Firefox.app/Contents/MacOS/firefox-bin"));
+    wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     login("admin", "secret");
@@ -32,16 +32,14 @@ public class ContactCreationTests {
   }
 
   @Test
-  public void testContactCreation() {
-
+  public void ContactCreationTests() {
     initContactCreation();
-    fillContactForm(new ContactData("Gabriele", "Salvatores", "Cinema", "+3923658974", "email@test.it"));
+    fillContactForm(new ContactData("Roberto", "Benigni", "Cinema", "+392365478123", "email@test.com", "www.cinema.it"));
     submitContactCreation();
-    gotoHome();
-
+    returnToHomePage();
   }
 
-  private void gotoHome() {
+  private void returnToHomePage() {
     wd.findElement(By.linkText("home page")).click();
   }
 
@@ -61,10 +59,14 @@ public class ContactCreationTests {
     wd.findElement(By.name("company")).sendKeys(contactData.getCompany());
     wd.findElement(By.name("home")).click();
     wd.findElement(By.name("home")).clear();
-    wd.findElement(By.name("home")).sendKeys(contactData.getHome());
+    wd.findElement(By.name("home")).sendKeys(contactData.getHomenumber());
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+    wd.findElement(By.name("address2")).click();
+    wd.findElement(By.name("homepage")).click();
+    wd.findElement(By.name("homepage")).clear();
+    wd.findElement(By.name("homepage")).sendKeys(contactData.getHomepage());
   }
 
   private void initContactCreation() {

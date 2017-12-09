@@ -4,15 +4,17 @@ public class ContactData {
   private final String firstname;
   private final String lastname;
   private final String company;
-  private final String home;
+  private final String homenumber;
   private final String email;
+  private final String homepage;
 
-  public ContactData(String firstname, String lastname, String company, String home, String email) {
+  public ContactData(String firstname, String lastname, String company, String homenumber, String email, String homepage) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.company = company;
-    this.home = home;
+    this.homenumber = homenumber;
     this.email = email;
+    this.homepage = homepage;
   }
 
   public String getFirstname() {
@@ -27,11 +29,15 @@ public class ContactData {
     return company;
   }
 
-  public String getHome() {
-    return home;
+  public String getHomenumber() {
+    return homenumber;
   }
 
   public String getEmail() {
     return email;
+  }
+
+  public String getHomepage() {
+    return homepage;
   }
 }

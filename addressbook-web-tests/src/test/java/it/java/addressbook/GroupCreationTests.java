@@ -12,7 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
 import static org.openqa.selenium.OutputType.*;
 
-public class ContactCreationTests {
+public class GroupCreationTests {
     FirefoxDriver wd;
     
     @BeforeMethod
@@ -22,36 +22,28 @@ public class ContactCreationTests {
     }
     
     @Test
-    public void ContactCreationTests() {
+    public void GroupCreationTests() {
         wd.get("http://localhost/addressbook/index.php");
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
         wd.findElement(By.name("user")).sendKeys("admin");
         wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).sendKeys("\\9");
-        wd.findElement(By.name("pass")).click();
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-        wd.findElement(By.linkText("add new")).click();
-        wd.findElement(By.name("firstname")).click();
-        wd.findElement(By.name("firstname")).clear();
-        wd.findElement(By.name("firstname")).sendKeys("Marcello");
-        wd.findElement(By.name("lastname")).click();
-        wd.findElement(By.name("lastname")).clear();
-        wd.findElement(By.name("lastname")).sendKeys("Losi");
-        wd.findElement(By.name("company")).click();
-        wd.findElement(By.name("company")).clear();
-        wd.findElement(By.name("company")).sendKeys("Google");
-        wd.findElement(By.name("home")).click();
-        wd.findElement(By.name("home")).clear();
-        wd.findElement(By.name("home")).sendKeys("+392658912");
-        wd.findElement(By.name("email")).click();
-        wd.findElement(By.name("email")).clear();
-        wd.findElement(By.name("email")).sendKeys("marcello@google.com");
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-        wd.findElement(By.cssSelector("body")).click();
-        wd.findElement(By.cssSelector("html")).click();
+        wd.findElement(By.linkText("groups")).click();
+        wd.findElement(By.name("new")).click();
+        wd.findElement(By.name("group_name")).click();
+        wd.findElement(By.name("group_name")).clear();
+        wd.findElement(By.name("group_name")).sendKeys("Test1");
+        wd.findElement(By.name("group_header")).click();
+        wd.findElement(By.name("group_header")).clear();
+        wd.findElement(By.name("group_header")).sendKeys("Test2");
+        wd.findElement(By.name("group_footer")).click();
+        wd.findElement(By.name("group_footer")).clear();
+        wd.findElement(By.name("group_footer")).sendKeys("Test3");
+        wd.findElement(By.name("submit")).click();
+        wd.findElement(By.linkText("group page")).click();
     }
     
     @AfterMethod
