@@ -11,7 +11,7 @@ public class ContactHelper extends BaseHelper{
   }
 
   public void returnToHomePage() {
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
   }
 
   public void submitContactCreation() {
@@ -40,10 +40,14 @@ public class ContactHelper extends BaseHelper{
   }
 
   public void selectContact() {
-    click(By.name("selected"));
+    click(By.name("selected[]"));
   }
 
   public void deleteSelectedContacts() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+  }
+
+  public void confirmSelectedContactsDeletion() {
+    wd.switchTo().alert().accept();
   }
 }
