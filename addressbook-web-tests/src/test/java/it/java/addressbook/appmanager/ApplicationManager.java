@@ -1,7 +1,6 @@
 package it.java.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -12,16 +11,7 @@ public class ApplicationManager {
   FirefoxDriver wd;
   private GroupHelper groupHelper = new GroupHelper(wd);
   private ContactHelper contactHelper = new ContactHelper(wd);
-  private NavigationHelper navigationHelper= new NavigationHelper(wd);
-
-  public static boolean isAlertPresent(FirefoxDriver wd) {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
+  private NavigationHelper navigationHelper = new NavigationHelper(wd);
 
 
   public void init() {
