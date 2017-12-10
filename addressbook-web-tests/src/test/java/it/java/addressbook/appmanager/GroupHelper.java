@@ -7,14 +7,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class GroupHelper extends BaseHelper {
 
   public GroupHelper(FirefoxDriver wd) {
+
     super(wd);
   }
 
   public void returnToGroupPage() {
+
     click(By.linkText("group page"));
   }
 
   public void submitGroupCreation() {
+
     click(By.name("submit"));
   }
 
@@ -25,7 +28,23 @@ public class GroupHelper extends BaseHelper {
   }
 
   public void initGroupCreation() {
+
     click(By.name("new"));
   }
 
+  public void selectGroup() {
+    click(By.name("selected[]"));
+  }
+
+  public void initGroupModification() {
+    click(By.name("edit"));
+  }
+
+  public void SubmitGroupModification() {
+    click(By.name("update"));
+  }
+
+  public void deleteSelectedGroups() {
+    click(By.name("delete"));
+  }
 }
