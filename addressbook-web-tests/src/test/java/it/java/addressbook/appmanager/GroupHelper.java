@@ -2,11 +2,12 @@ package it.java.addressbook.appmanager;
 
 import it.java.addressbook.models.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class GroupHelper extends BaseHelper {
 
-  public GroupHelper(FirefoxDriver wd) {
+  public GroupHelper(WebDriver wd) {
 
     super(wd);
   }

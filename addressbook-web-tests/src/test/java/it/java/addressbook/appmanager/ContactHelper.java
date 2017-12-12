@@ -2,11 +2,12 @@ package it.java.addressbook.appmanager;
 
 import it.java.addressbook.models.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ContactHelper extends BaseHelper{
 
-  public ContactHelper(FirefoxDriver wd) {
+  public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
