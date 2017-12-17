@@ -10,7 +10,7 @@ public class ContactModificationTests extends TestBase {
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Franco", "Buselli", "Bar", "+392365478123", "email@test.com", "www.cinema.it", null), false);
     app.getContactHelper().submitContactModification();
-    app.getContactHelper().goToHomePage();
+    app.getNavigationHelper().goToHomePage();
 
   }
 }
