@@ -5,10 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
-
-import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
@@ -33,7 +29,7 @@ public class ApplicationManager {
       wd = new ChromeDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     groupHelper = new GroupHelper(wd);
     contactHelper = new ContactHelper(wd);
