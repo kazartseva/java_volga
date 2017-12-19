@@ -3,7 +3,6 @@ package it.java.addressbook.appmanager;
 import it.java.addressbook.models.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class GroupHelper extends BaseHelper {
 
@@ -59,4 +58,5 @@ public class GroupHelper extends BaseHelper {
   public boolean isThereAGroup() {
     return (isElementPresent(By.name("selected[]")));
   }
-}
+
+ }

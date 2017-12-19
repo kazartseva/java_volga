@@ -2,9 +2,7 @@ package it.java.addressbook.appmanager;
 
 import it.java.addressbook.models.ContactData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -55,5 +53,16 @@ public class ContactHelper extends BaseHelper {
 
   public void confirmSelectedContactsDeletion() {
     wd.switchTo().alert().accept();
+  }
+
+  public boolean isThereAContact() {
+    return (isElementPresent(By.name("selected[]")));
+  }
+
+  public void createAContact(ContactData contact, boolean b) {
+    initContactCreation();
+    fillContactForm(contact,b);
+    submitContactCreation();
+    new NavigationHelper(wd).goToHomePage();
   }
 }
