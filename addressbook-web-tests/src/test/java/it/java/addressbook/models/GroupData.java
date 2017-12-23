@@ -15,6 +15,13 @@ public class GroupData {
     return name;
   }
 
+  @Override
+  public String toString() {
+    return "GroupData{" +
+            "name='" + name + '\'' +
+            '}';
+  }
+
   public String getHeader() {
     return header;
   }
