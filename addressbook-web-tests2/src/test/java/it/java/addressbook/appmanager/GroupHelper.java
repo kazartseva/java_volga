@@ -3,7 +3,6 @@ package it.java.addressbook.appmanager;
 import it.java.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class GroupHelper extends HelperBase {
 
@@ -29,6 +28,13 @@ public class GroupHelper extends HelperBase {
     click(By.name("new"));
   }
 
+  public void createGroup(GroupData group) {
+    initGroupCreation();
+    fillGroupForm(group);
+    submitGroupCreation();
+    returnToGroupPage();
+  }
+
   public void deleteSelectedGroups() {
     click(By.name("delete"));
   }
@@ -44,4 +50,17 @@ public class GroupHelper extends HelperBase {
   public void submitGroupModification() {
     click(By.name("update"));
   }
+
+  //Считаем количество групп: находим все элементы "selected[]"
+  //и определяем размер списка (size())
+  public int getGroupCount() {
+    return wd.findElements(By.name("selected[]")).size();
+
+  }
+
+  public boolean isThereAGroup() {
+   return isElementPresent(By.name("selected[]"));
+
+  }
+
 }
