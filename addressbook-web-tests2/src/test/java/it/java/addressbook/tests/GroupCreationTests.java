@@ -16,25 +16,19 @@ public class GroupCreationTests extends TestBase {
     //Получим список групп перед созданием
     List<GroupData> before = app.getGroupHelper().getGroupList();
     //Создадим переменную group
-    GroupData group = new GroupData("Test1", "Test2", "Test3");
+    GroupData group = new GroupData("TestNEW", "Test2", "Test3");
     app.getGroupHelper().createGroup(group);
     //Получим список групп после создания
     List<GroupData> after = app.getGroupHelper().getGroupList();
     //Проверка по количеству (size) элеметов списка
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    //Для корректного сравнения двух списков добавим в старый список ту группу, которую создали во время теста
-    //Нам необходимо знать id созданной группы. Это будет максимальное id всех групп.
-    //Найдем максимальное значение идентификатора Id
-    int max = 0;
-    //Переменная g пробегает список after, находим максимальный идентификатор
-    for (GroupData g : after) {
-      if (g.getId() > max) {
-        max = g.getId();
-      }
-    }
+
     //Присвоим идентификатору найденное максимальное значение
-    group.setId(max);
+    //Превратим список в поток, по этому потоку пробегает сравниватель и находит максимальный элемент, при этом сравниваются
+    //объекты типа GroupData путем сравнения их идентификаторов, на выходе получаем группу с максимальным идентификатором
+    // и берем id этой группы
+    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
 
     //Добавляем в старый список ту группу, которую создали
     before.add(group);
