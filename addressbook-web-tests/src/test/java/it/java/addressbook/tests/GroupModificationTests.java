@@ -1,25 +1,44 @@
 package it.java.addressbook.tests;
 
 import it.java.addressbook.models.GroupData;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class GroupModificationTests extends TestBase{
 
   @Test
   public void testGroupModification(){
-    //Иду на страницу Groups
     app.getNavigationHelper().goToGroupPage();
-    //Проверяю, есть ли хотя бы одна группа, которую можно модифицировать
+    //Проверка и обеспечение предусловий для теста (наличие хотя бы одной группы)
     if (! app.getGroupHelper().isThereAGroup()) {
-      //Странице Groups пустая, поэтому создаю новую группу
       app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
     }
-    //На странице Groups есть группы
-    //Модифицирую одну группу
-    app.getGroupHelper().selectGroup();
+
+    //Список групп до модифицирования
+    List<GroupData> before = app.getGroupHelper().getGroupList();
+    //Модификация группы
+    app.getGroupHelper().selectGroup(0);
     app.getGroupHelper().initGroupModification();
-    app.getGroupHelper().fillGroupForm(new GroupData("Утро", "Туманное", "Седое"));
+    GroupData group = new GroupData(before.get(0).getId(),"Giulio", "header", "footer");
+    app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().SubmitGroupModification();
+    app.getGroupHelper().returnToGroupPage();
+    //Список групп после модифицирования
+    List<GroupData> after = app.getGroupHelper().getGroupList();
+
+    //Проверка совпадения размеров списков
+    Assert.assertEquals(after.size(), before.size());
+
+    //Упорядочение списков и проверка совпадения элементов списков
+    before.remove(0);
+    before.add(group);
+    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
 
   }
 }

@@ -17,10 +17,12 @@ public class GroupModificationTests extends TestBase{
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
     }
+
+    //Список групп до модифицирования
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup(before.size() - 1);
     app.getGroupHelper().initGroupModification();
-    //Добавим в параметры группы идентификационный номер, который оставляем прежним
+    //Добавим в параметры группы идентификационный номер id, который оставляем прежним
     GroupData group = new GroupData(before.get(before.size() - 1).getId(),"TestWW", "TestB", "TestC");
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
@@ -29,7 +31,7 @@ public class GroupModificationTests extends TestBase{
     Assert.assertEquals(before.size(), after.size());
 
     //Модифицируем старый список, чтобы можно было предсказать ожидаемый результат
-    //Удалим элемент, который модифицировать, и добавим модифицированный элемент
+    //Удалим элемент, который выбрали чтобы модифицировать, и добавим модифицированный элемент
     before.remove(before.size() - 1);
     before.add(group);
 
