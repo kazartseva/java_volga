@@ -46,6 +46,7 @@ public class GroupHelper extends HelperBase {
   //Находим все элементы (findElements), потом среди этих элементов выбираем
   // нужный по индексу (get(index)), и потом по этому элементу выполняем клик
   public void selectGroup(int index) {
+
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
