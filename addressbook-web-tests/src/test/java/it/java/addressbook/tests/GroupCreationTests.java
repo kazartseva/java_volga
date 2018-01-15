@@ -15,7 +15,7 @@ public class GroupCreationTests extends TestBase {
 
     //создаем список групп до добавления новой группы
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData(before.get(before.size() - 1).getId(),"Giuseppe", "header", "footer");
+    GroupData group = new GroupData(before.get(0).getId(),"Giuseppe", "header", "footer");
     app.getGroupHelper().createGroup(group);
 
     //создаем список групп после добавления группы

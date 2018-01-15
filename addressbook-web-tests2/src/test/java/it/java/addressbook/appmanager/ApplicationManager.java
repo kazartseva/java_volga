@@ -15,9 +15,9 @@ public class ApplicationManager {
 
   WebDriver wd;
 
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
-  private GroupHelper groupHelper;
+  private SessionHelper sessionHelper = new SessionHelper(wd);
+  private GroupHelper groupHelper = new GroupHelper(wd);
+  private NavigationHelper navigationHelper = new NavigationHelper(wd);
   private String browser;
 
   public ApplicationManager(String browser) {
@@ -33,8 +33,9 @@ public class ApplicationManager {
     } else if (browser.equals(BrowserType.SAFARI)) {
       wd = new SafariDriver(new SafariOptions().setUseTechnologyPreview(true));
     }
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+    //wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook");
+
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
@@ -54,5 +55,9 @@ public class ApplicationManager {
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public SessionHelper getSessionHelper() {
+    return sessionHelper;
   }
 }
