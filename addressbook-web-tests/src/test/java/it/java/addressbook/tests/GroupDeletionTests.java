@@ -10,7 +10,7 @@ public class GroupDeletionTests extends TestBase{
 
   @Test
   public void testGroupDeletion() {
-    //Проверка выполнения предусловий (наличие групп)
+    //Проверка и обеспечивание предусловий (наличие групп)
     app.getNavigationHelper().goToGroupPage();
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
@@ -31,6 +31,8 @@ public class GroupDeletionTests extends TestBase{
     //Проверяем совпадение элементов списков
     before.remove(before.size() - 1);
     Assert.assertEquals(before, after);
+
+
 
 
   }

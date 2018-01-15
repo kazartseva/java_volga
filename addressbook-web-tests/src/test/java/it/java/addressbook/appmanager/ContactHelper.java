@@ -3,8 +3,12 @@ package it.java.addressbook.appmanager;
 import it.java.addressbook.models.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends BaseHelper {
 
@@ -35,16 +39,16 @@ public class ContactHelper extends BaseHelper {
     click(By.linkText("add new"));
   }
 
-  public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void initContactModification(int index) {
+    wd.findElements(By.cssSelector("img[title='Edit']")).get(index).click();
   }
 
   public void submitContactModification() {
     click(By.name("update"));
   }
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void deleteSelectedContacts() {
@@ -64,5 +68,20 @@ public class ContactHelper extends BaseHelper {
     fillContactForm(contact,b);
     submitContactCreation();
     new NavigationHelper(wd).goToHomePage();
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+
+    for (WebElement element : elements) {
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+      String firstname = element.findElement(By.cssSelector("tr td:nth-child(3)")).getText();
+      String lastname = element.findElement(By.cssSelector("tr td:nth-child(2)")).getText();
+      ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null);
+      contacts.add(contact);
+    }
+    return contacts;
+
   }
 }
