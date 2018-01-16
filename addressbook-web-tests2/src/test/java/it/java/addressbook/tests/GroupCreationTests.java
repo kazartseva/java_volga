@@ -16,7 +16,7 @@ public class GroupCreationTests extends TestBase {
     //Получим список групп перед созданием
     List<GroupData> before = app.group().list();
     //Создадим переменную group
-    GroupData group = new GroupData(before.size() - 1,"TestNEW", "Test2", "Test3");
+    GroupData group = new GroupData().withName("TestWW");
 
     //Создадим новую группу
     app.group().create(group);
