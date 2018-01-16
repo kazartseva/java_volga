@@ -5,27 +5,26 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() {
-    app.getNavigationHelper().gotoGroupPage();
+    app.goTo().groupPage();
 
     //Получим список групп перед созданием
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-
+    List<GroupData> before = app.group().list();
     //Создадим переменную group
     GroupData group = new GroupData(before.size() - 1,"TestNEW", "Test2", "Test3");
-    app.getGroupHelper().createGroup(group);
+
+    //Создадим новую группу
+    app.group().create(group);
 
     //Получим список групп после создания
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> after = app.group().list();
     //Проверка по количеству (size) элеметов списка
     Assert.assertEquals(after.size(), before.size() + 1);
-
 
     //Добавляем в старый список ту группу, которую создали
     before.add(group);

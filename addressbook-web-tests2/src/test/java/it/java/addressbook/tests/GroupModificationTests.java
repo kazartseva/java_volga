@@ -12,9 +12,9 @@ public class GroupModificationTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.getNavigationHelper().gotoGroupPage();
-    if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
+    app.goTo().groupPage();
+    if (app.group().list().size() == 0) {
+      app.group().create(new GroupData("Test1", "Test2", "Test3"));
     }
 
   }
@@ -22,14 +22,11 @@ public class GroupModificationTests extends TestBase{
   @Test
   public void testGroupModification() {
 
-    //Список групп до модифицирования
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    //Модификация группы
+    List<GroupData> before = app.group().list();
     int index = before.size() - 1;
     GroupData group = new GroupData(before.get(index).getId(),"TestWW", "TestB", "TestC");
-    app.getGroupHelper().modifyGroup(index, group);
-    //Список групп после модифицирования
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.group().modify(index, group);
+    List<GroupData> after = app.group().list();
 
     //Проверка совпадения размеров списков
     Assert.assertEquals(after.size(), before.size());

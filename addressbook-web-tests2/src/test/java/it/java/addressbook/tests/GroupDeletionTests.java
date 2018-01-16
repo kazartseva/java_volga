@@ -11,32 +11,28 @@ public class GroupDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.getNavigationHelper().gotoGroupPage();
-    if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
+    app.goTo().groupPage();
+    if (app.group().list().size() == 0) {
+      app.group().create(new GroupData("Test1", "Test2", "Test3"));
     }
   }
-  
+
   @Test
   public void testGroupDeletion() {
 
-    //Получим список групп до удаления
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    //Удаление группы
-    app.getGroupHelper().selectGroup(before.size() - 1);
-    app.getGroupHelper().deleteSelectedGroups();
-    app.getGroupHelper().returnToGroupPage();
-    //Получим список групп после удаления
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> before = app.group().list();
+    int index = before.size() - 1;
+    app.group().delete(index);
+    List<GroupData> after = app.group().list();
 
     //Сравниваем размер списков
     Assert.assertEquals(after.size(), before.size() - 1);
 
     //Для сравнения списков групп удалим из списка before ту группу, которую будем удалять в тесте
-    before.remove(before.size() - 1);
-    //Сравниваем два элемента с одинаковыми индексами
+    before.remove(index);
     Assert.assertEquals(before, after);
   }
+
 
 }
 

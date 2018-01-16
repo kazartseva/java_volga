@@ -32,20 +32,27 @@ public class GroupHelper extends HelperBase {
     click(By.name("new"));
   }
 
-  public void createGroup(GroupData group) {
+  public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     returnToGroupPage();
   }
 
-  public void modifyGroup(int index, GroupData group) {
+  public void modify(int index, GroupData group) {
     selectGroup(index);
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
     returnToGroupPage();
   }
+
+  public void delete(int index) {
+    selectGroup(index);
+    deleteSelectedGroups();
+    returnToGroupPage();
+  }
+
   public void deleteSelectedGroups() {
     click(By.name("delete"));
   }
@@ -77,7 +84,7 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
     //Создаем список типа GroupData с названием groups
     List<GroupData> groups = new ArrayList<GroupData>();
     //Получаем список объектов типа WebElement которые имеют tag span и css класс group
