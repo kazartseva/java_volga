@@ -1,38 +1,55 @@
 package it.java.addressbook.models;
 
 public class ContactData {
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String company;
-  private final String homenumber;
-  private final String email;
-  private final String homepage;
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String lastname;
+  private String company;
+  private String homenumber;
+  private String email;
+  private String homepage;
   private String group;
 
-  public ContactData(String firstname, String lastname, String company, String homenumber, String email, String homepage, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.company = company;
-    this.homenumber = homenumber;
-    this.email = email;
-    this.homepage = homepage;
-    this.group = group;
-
-  }
-
-  public ContactData(int id, String firstname, String lastname, String company, String homenumber, String email, String homepage, String group) {
+  public ContactData withId(int id) {
     this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.company = company;
-    this.homenumber = homenumber;
-    this.email = email;
-    this.homepage = homepage;
-    this.group = group;
+    return this;
   }
 
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withHomenumber(String homenumber) {
+    this.homenumber = homenumber;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withHomepage(String homepage) {
+    this.homepage = homepage;
+    return this;
+  }
+
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
 
   public int getId() {
     return id;

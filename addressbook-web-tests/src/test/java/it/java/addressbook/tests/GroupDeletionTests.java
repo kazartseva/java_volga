@@ -2,39 +2,46 @@ package it.java.addressbook.tests;
 
 import it.java.addressbook.models.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase{
 
+  @BeforeMethod
+  private void ensurePreconditions() {
+    app.goTo().groupPage();
+    if (app.group().all().size() == 0) {
+      app.group().create(new GroupData().withName("Test1").withHeader("Test2").withFooter("Test3"));
+    }
+  }
+
   @Test
   public void testGroupDeletion() {
-    //Проверка и обеспечивание предусловий (наличие групп)
-    app.getNavigationHelper().goToGroupPage();
-    if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
-    }
+    ensurePreconditions();
 
     //Список групп до удаления
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    //Удаление группы
-    app.getGroupHelper().selectGroup(before.size() - 1);
-    app.getGroupHelper().deleteSelectedGroups();
-    app.getGroupHelper().returnToGroupPage();
+    Set<GroupData> before = app.group().all();
+    //Создаем deletedGroup - первую попавшуюся группу из множества, которую будем удалять.
+    GroupData deletedGroup = before.iterator().next();
+    app.group().delete(deletedGroup);
+
     //Список групп после удаления
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    Set<GroupData> after = app.group().all();
 
     //Сравниваем размер списков
     Assert.assertEquals(after.size(), before.size() - 1);
 
     //Проверяем совпадение элементов списков
-    before.remove(before.size() - 1);
+    before.remove(deletedGroup);
     Assert.assertEquals(before, after);
 
 
 
 
   }
+
+
 
 }

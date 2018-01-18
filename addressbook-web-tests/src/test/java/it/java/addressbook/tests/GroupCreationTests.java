@@ -4,32 +4,27 @@ import it.java.addressbook.models.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
   public void groupCreationTests() {
-    app.getNavigationHelper().goToGroupPage();
+    app.goTo().groupPage();
 
-    //создаем список групп до добавления новой группы
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData(before.get(before.size() - 1).getId(),"Giuseppe", "header", "footer");
-    app.getGroupHelper().createGroup(group);
+    //создаем множество групп до добавления новой группы
+    Set<GroupData> before = app.group().all();
 
-    //создаем список групп после добавления группы
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    GroupData group = new GroupData().withName("Test1").withHeader("Test2").withFooter("Test3");
+    app.group().create(group);
+
+    //создаем множество групп после добавления группы
+    Set<GroupData> after = app.group().all();
 
     //сравниваем размеры списков до и после добавления группы
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    before.add(group);
-
-    //Сортируем и сравниваем списки по элементам
-    Comparator<? super GroupData> byID = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byID);
-    after.sort(byID);
+    before.add(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()));
     Assert.assertEquals(before, after);
   }
 

@@ -1,49 +1,51 @@
 package it.java.addressbook.tests;
 
 import it.java.addressbook.models.ContactData;
-import it.java.addressbook.models.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactDeletionTests extends TestBase {
+
+  @BeforeMethod
+  private void ensurePreconditions() {
+    app.goTo().homePage();
+    if (app.contact().list().size() == 0) {
+      app.contact().createAContact(new ContactData().withFirstname("Alessandro").withLastname("Mariani").withCompany("Cinema").withHomenumber("+392365478956").
+              withEmail("email@test.com").withHomepage("www.cinema.it").withGroup("[none]"), true);
+    }
+  }
 
   @Test
   public void testDeletionContact() {
 
-    app.getNavigationHelper().goToHomePage();
+    ensurePreconditions();
 
-    //Проверка и обеспечивание предусловий (наличие контакта)
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createAContact(new ContactData("Roberto",
-              "Benigni", "Cinema", "+392365478123",
-              "email@test.com", "www.cinema.it", "[none]"), true);
-    }
-
-    //создание списка контактов до удаления
-    List<ContactData> before = app.getContactHelper().getContactList();
+    //создание множества контактов до удаления
+    Set<ContactData> before = app.contact().all();
 
     //Удаляю контакт
-    app.getContactHelper().selectContact(2);
-    app.getContactHelper().deleteSelectedContacts();
-    app.getContactHelper().confirmSelectedContactsDeletion();
-    app.getNavigationHelper().goToHomePage();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
 
-    //создание списка контактов после удаления
-    List<ContactData> after = app.getContactHelper().getContactList();
+    //создание множества контактов после удаления
+    Set<ContactData> after = app.contact().all();
 
-    //сравниваем размеры списков до и после удаления контакта
+    //сравниваем размеры множеств до и после удаления контакта
     Assert.assertEquals(before.size(), after.size() + 1);
 
-    before.remove(2);
+    before.remove(deletedContact);
 
-    //сравниваем списки по элементам
+    //сравниваем множества по элементам
     Assert.assertEquals(before, after);
 
 
   }
+
+
 
 }
 

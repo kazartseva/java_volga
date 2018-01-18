@@ -9,36 +9,38 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
+  private void ensurePreconditions() {
+    app.goTo().homePage();
+    if (app.contact().list().size() == 0) {
+      app.contact().createAContact(new ContactData().withFirstname("Patrizia").withLastname("Fannucci").
+              withCompany("LUDEC").withHomenumber("333666").withEmail("email"), true);
+    }
+  }
+
+
   @Test
   public void testContactModification() {
 
-    app.getNavigationHelper().goToHomePage();
-    //Проверка и обеспечение предусловий (наличие контакта для модификации)
-    if (! app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createAContact(new ContactData("Patrizia",
-              "Fannucci", "LUDEC", "333666", "email",
-              "www", "[none]"),true);
-    }
+    ensurePreconditions();
 
     //Получение списка контактов до модификации
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
 
     //Модификация контакта
-    app.getContactHelper().initContactModification(3);
-    ContactData contact = new ContactData("Luca", "Ivanov",
-            "Bar", "+392365478123", "email@test.com",
-            "www.cinema.it", null);
-    app.getContactHelper().fillContactForm(contact, false);
-    app.getContactHelper().submitContactModification();
-    app.getNavigationHelper().goToHomePage();
+    ContactData contact = new ContactData().withFirstname("Luca").withLastname("Ivanov").
+            withCompany("Bar").withHomenumber("+392365478123").withEmail("email@test.com").withHomepage("www.cinema.it");
+    app.contact().initContactModification(before.size() - 1);
+    app.contact().fillContactForm(contact, false);
+    app.contact().submitContactModification();
+    app.goTo().homePage();
 
     //Получение списка контактов после модификации
-    List<ContactData> after = app.getContactHelper().getContactList();
+    List<ContactData> after = app.contact().list();
 
     //сравниваем размеры списков до и после удаления контакта
-    Assert.assertEquals(before.size(), after.size() );
+    Assert.assertEquals(before.size(), after.size());
 
-    before.remove(3);
+    before.remove(before.size() - 1);
     before.add(contact);
 
     //сортируем и сравниваем списки по элементам
@@ -47,4 +49,5 @@ public class ContactModificationTests extends TestBase {
     after.sort(byId);
 
   }
+
 }

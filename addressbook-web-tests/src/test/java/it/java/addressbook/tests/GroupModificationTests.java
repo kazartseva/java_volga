@@ -2,43 +2,47 @@ package it.java.addressbook.tests;
 
 import it.java.addressbook.models.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupModificationTests extends TestBase{
 
+  @BeforeMethod
+  private void ensurePreconditions() {
+    app.goTo().groupPage();
+    //Проверка и обеспечение предусловий для теста (наличие хотя бы одной группы)
+    if (app.group().all().size() == 0) {
+      app.group().create(new GroupData().withName("Test1").withHeader("Test2").withFooter("Test3"));
+    }
+  }
+
   @Test
   public void testGroupModification(){
-    app.getNavigationHelper().goToGroupPage();
-    //Проверка и обеспечение предусловий для теста (наличие хотя бы одной группы)
-    if (! app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("Test1", "Test2", "Test3"));
-    }
+    ensurePreconditions();
 
-    //Список групп до модифицирования
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    //Множество групп до модифицирования
+    Set<GroupData> before = app.group().all();
     //Модификация группы
-    app.getGroupHelper().selectGroup(0);
-    app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(0).getId(),"Giulio", "header", "footer");
-    app.getGroupHelper().fillGroupForm(group);
-    app.getGroupHelper().SubmitGroupModification();
-    app.getGroupHelper().returnToGroupPage();
-    //Список групп после модифицирования
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    GroupData modifiedGroup = before.iterator().next();
 
-    //Проверка совпадения размеров списков
+    GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("Giulio").withHeader("header").withFooter("footer");
+
+    app.group().modify(group);
+
+    //Множество групп после модифицирования
+    Set<GroupData> after = app.group().all();
+
+    //Проверка совпадения размеров множеств
     Assert.assertEquals(after.size(), before.size());
 
-    //Упорядочение списков и проверка совпадения элементов списков
-    before.remove(0);
+    //Проверка совпадения элементов множеств
+    before.remove(modifiedGroup);
     before.add(group);
-    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
 
   }
+
+
 }
