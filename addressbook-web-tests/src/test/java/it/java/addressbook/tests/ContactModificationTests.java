@@ -4,14 +4,13 @@ import it.java.addressbook.models.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
   private void ensurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       app.contact().createAContact(new ContactData().withFirstname("Patrizia").withLastname("Fannucci").
               withCompany("LUDEC").withHomenumber("333666").withEmail("email"), true);
     }
@@ -24,30 +23,28 @@ public class ContactModificationTests extends TestBase {
     ensurePreconditions();
 
     //Получение списка контактов до модификации
-    List<ContactData> before = app.contact().list();
+    Set<ContactData> before = app.contact().all();
 
     //Модификация контакта
-    ContactData contact = new ContactData().withFirstname("Luca").withLastname("Ivanov").
-            withCompany("Bar").withHomenumber("+392365478123").withEmail("email@test.com").withHomepage("www.cinema.it");
-    app.contact().initContactModification(before.size() - 1);
-    app.contact().fillContactForm(contact, false);
-    app.contact().submitContactModification();
-    app.goTo().homePage();
+    ContactData modifiedContact = before.iterator().next();
+    ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Veronica").withLastname("Paoli").
+            withCompany("Cinema").withHomenumber("+39236547459").withEmail("email@test.com").withHomepage("www.cinema.it");
+
+    app.contact().modify(contact);
 
     //Получение списка контактов после модификации
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
 
     //сравниваем размеры списков до и после удаления контакта
     Assert.assertEquals(before.size(), after.size());
 
-    before.remove(before.size() - 1);
+    before.remove(modifiedContact);
     before.add(contact);
 
     //сортируем и сравниваем списки по элементам
-    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
+    Assert.assertEquals(before, after);
 
   }
+
 
 }

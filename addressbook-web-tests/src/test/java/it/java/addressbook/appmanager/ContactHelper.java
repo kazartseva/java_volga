@@ -49,6 +49,10 @@ public class ContactHelper extends BaseHelper {
     click(By.name("update"));
   }
 
+  private void initContactModificationById(int id) {
+    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+  }
+
   public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
@@ -76,6 +80,15 @@ public class ContactHelper extends BaseHelper {
     new NavigationHelper(wd).homePage();
   }
 
+  public void modify(ContactData contact) {
+    initContactModificationById(contact.getId());
+    fillContactForm(contact, false);
+    submitContactModification();
+    new NavigationHelper(wd).homePage();
+  }
+
+
+
   public void delete(int index) {
     selectContact(index);
     deleteSelectedContacts();
@@ -88,22 +101,6 @@ public class ContactHelper extends BaseHelper {
     deleteSelectedContacts();
     confirmSelectedContactsDeletion();
     new NavigationHelper(wd).homePage();
-
-  }
-
-
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<>();
-    List<WebElement> elements = wd.findElements(By.name("entry"));
-
-    for (WebElement element : elements) {
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      String firstname = element.findElement(By.cssSelector("tr td:nth-child(3)")).getText();
-      String lastname = element.findElement(By.cssSelector("tr td:nth-child(2)")).getText();
-      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
-      contacts.add(contact);
-    }
-    return contacts;
 
   }
 
