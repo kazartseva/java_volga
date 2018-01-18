@@ -1,11 +1,17 @@
 package it.java.addressbook.tests;
 
 import it.java.addressbook.models.ContactData;
+import it.java.addressbook.models.Contacts;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeletionTests extends TestBase {
 
@@ -20,30 +26,15 @@ public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testDeletionContact() {
-
     ensurePreconditions();
-
-    //создание множества контактов до удаления
-    Set<ContactData> before = app.contact().all();
-
-    //Удаляю контакт
+    Contacts before = app.contact().all();
     ContactData deletedContact = before.iterator().next();
     app.contact().delete(deletedContact);
-
-    //создание множества контактов после удаления
-    Set<ContactData> after = app.contact().all();
-
-    //сравниваем размеры множеств до и после удаления контакта
-    Assert.assertEquals(before.size(), after.size() + 1);
-
-    before.remove(deletedContact);
-
-    //сравниваем множества по элементам
-    Assert.assertEquals(before, after);
-
+    Contacts after = app.contact().all();
+    assertThat(before.size(), equalTo(after.size() + 1));
+    assertThat(after, equalTo(before.without(deletedContact)));
 
   }
-
 
 
 }
