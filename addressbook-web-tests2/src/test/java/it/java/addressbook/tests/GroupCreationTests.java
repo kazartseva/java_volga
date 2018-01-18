@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
@@ -13,26 +14,23 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
     app.goTo().groupPage();
 
-    //Получим список групп перед созданием
-    List<GroupData> before = app.group().list();
+    //Получим множество групп перед созданием
+    Set<GroupData> before = app.group().all();
     //Создадим переменную group
     GroupData group = new GroupData().withName("TestWW");
 
     //Создадим новую группу
     app.group().create(group);
 
-    //Получим список групп после создания
-    List<GroupData> after = app.group().list();
+    //Получим множество групп после создания
+    Set<GroupData> after = app.group().all();
     //Проверка по количеству (size) элеметов списка
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    //Добавляем в старый список ту группу, которую создали
+    //Вычисляем идентификатор вновь добавленной группы (максимальный из всех) и добавляем ее в коллекцию before
+    group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
     before.add(group);
-
-    //сортируем списки по id при помощи метода sort (java 8)
-    Comparator<? super GroupData> byID = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byID);
-    after.sort(byID);
+    Assert.assertEquals(after, before);
   }
 
 }

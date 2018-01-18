@@ -5,8 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -39,16 +40,16 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
-  public void modify(int index, GroupData group) {
-    selectGroup(index);
+  public void modify(GroupData group) {
+    selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
     returnToGroupPage();
   }
 
-  public void delete(int index) {
-    selectGroup(index);
+  public void delete(GroupData group) {
+    selectGroupById(group.getId());
     deleteSelectedGroups();
     returnToGroupPage();
   }
@@ -57,11 +58,9 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
-  //Находим все элементы (findElements), потом среди этих элементов выбираем
-  // нужный по индексу (get(index)), и потом по этому элементу выполняем клик
-  public void selectGroup(int index) {
-
-    wd.findElements(By.name("selected[]")).get(index).click();
+  //выбираем группу по id
+  public void selectGroupById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void initGroupModification() {
@@ -72,9 +71,9 @@ public class GroupHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  //Считаем количество групп: находим все элементы "selected[]"
-  //и определяем размер списка (size())
-  public int getGroupCount() {
+
+
+   public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
 
   }
@@ -84,21 +83,17 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public List<GroupData> list() {
-    //Создаем список типа GroupData с названием groups
-    List<GroupData> groups = new ArrayList<GroupData>();
-    //Получаем список объектов типа WebElement которые имеют tag span и css класс group
+  public Set<GroupData> all() {
+    //создаем множество
+    Set<GroupData> groups = new HashSet<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-    //Пройдем по этим элементам в цикле.
-    //(WebElement element : elements) element пробегает по списку elements
     for (WebElement element : elements) {
-      //и из каждого элемента получаем текст --> name
-      String name = element.getText();
-      //Получили идентификатор для групп --> атрибут value
+       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       groups.add(new GroupData().withId(id).withName(name));
     }
     return groups;
   }
+
 
 }
