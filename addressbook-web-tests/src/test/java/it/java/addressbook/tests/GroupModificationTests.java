@@ -1,11 +1,17 @@
 package it.java.addressbook.tests;
 
 import it.java.addressbook.models.GroupData;
+import it.java.addressbook.models.Groups;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests extends TestBase{
 
@@ -21,26 +27,18 @@ public class GroupModificationTests extends TestBase{
   @Test
   public void testGroupModification(){
     ensurePreconditions();
-
-    //Множество групп до модифицирования
-    Set<GroupData> before = app.group().all();
-    //Модификация группы
+    Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
-
-    GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("Giulio").withHeader("header").withFooter("footer");
-
+    GroupData group = new GroupData().
+            withId(modifiedGroup.getId()).withName("Giulio").withHeader("header").withFooter("footer");
     app.group().modify(group);
-
-    //Множество групп после модифицирования
-    Set<GroupData> after = app.group().all();
+    Groups after = app.group().all();
 
     //Проверка совпадения размеров множеств
     Assert.assertEquals(after.size(), before.size());
 
     //Проверка совпадения элементов множеств
-    before.remove(modifiedGroup);
-    before.add(group);
-    Assert.assertEquals(before, after);
+    assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
 
   }
 
