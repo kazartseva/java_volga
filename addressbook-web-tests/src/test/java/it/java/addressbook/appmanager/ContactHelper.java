@@ -150,9 +150,9 @@ public class ContactHelper extends BaseHelper {
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
       String firstname = cells.get(1).getText();
       String lastname = cells.get(2).getText();
-      String[] phones = cells.get(5).getText().split("\n");
+      String allPhones = cells.get(5).getText();
       ContactData contact = new ContactData().withId(id).withFirstname(firstname).
-              withLastname(lastname).withHomeNumber(phones[0]).withMobileNumber(phones[1]).withWorkNumber(phones[2]);
+              withLastname(lastname).withAllPhones(allPhones);
       contactCache.add(contact);
     }
     return new Contacts(contactCache);
