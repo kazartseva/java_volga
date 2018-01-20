@@ -9,12 +9,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void contactCreationTests() {
     app.goTo().homePage();
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withFirstname("Alessandro").withLastname("Mariani").withCompany("Cinema").withHomeNumber("777")
-            .withMobileNumber("888").withWorkNumber("999").withEmail("email@test.com").withHomepage("www.cinema.it").withGroup("[none]");
+    ContactData contact = new ContactData().withFirstname("Alessandro").withLastname("Mariani").withCompany("Cinema")
+            .withHomeNumber("777").withMobileNumber("888").withWorkNumber("999")
+            .withEmail1("email1@test.com").withEmail2("email2@test.com").withEmail3("email3@test.com")
+            .withHomepage("www.cinema.it").withGroup("[none]")
+            .withAddress("address1").withAddress2("address2");
     app.contact().createAContact(contact, true);
     assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();

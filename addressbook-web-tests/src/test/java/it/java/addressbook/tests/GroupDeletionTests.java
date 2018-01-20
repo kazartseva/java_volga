@@ -19,7 +19,7 @@ public class GroupDeletionTests extends TestBase {
     }
   }
 
-  @Test
+  @Test(enabled = false)
   public void testGroupDeletion() {
     ensurePreconditions();
     Groups before = app.group().all();
