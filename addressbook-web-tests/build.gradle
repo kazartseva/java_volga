@@ -9,6 +9,6 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:3.8.1'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     compile 'org.gosu-lang.gosu.managed:gw-jcommander:1.48'
-
+    compile 'com.thoughtworks.xstream:xstream:1.4.10'
 
 }
