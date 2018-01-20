@@ -33,6 +33,7 @@ public class ContactHelper extends BaseHelper {
     type(By.name("homepage"), contactData.getHomepage());
     type(By.name("address"), contactData.getAddress());
     type(By.name("address2"), contactData.getAddress2());
+    attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());

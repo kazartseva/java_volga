@@ -1,5 +1,7 @@
 package it.java.addressbook.models;
 
+import java.io.File;
+
 public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstname;
@@ -18,6 +20,7 @@ public class ContactData {
   private String address2;
   private String mainAddress;
   private String group;
+  private File photo;
 
 
 
@@ -87,7 +90,10 @@ public class ContactData {
     return this;
   }
 
-
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public ContactData withHomepage(String homepage) {
     this.homepage = homepage;
@@ -178,6 +184,11 @@ public class ContactData {
   public String getGroup() {
     return group;
   }
+
+  public File getPhoto() {
+    return photo;
+  }
+
 
 
 
