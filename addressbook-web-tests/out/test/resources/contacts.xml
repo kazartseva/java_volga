@@ -11,7 +11,7 @@
     <email3>email3.0@gmail.com</email3>
     <homepage>www.homepage0.com</homepage>
     <address>address 0</address>
-    <address2>address2  0</address2>
+    <address2>address2 0</address2>
     <group>[none]</group>
   </contact>
   <contact>
@@ -26,7 +26,7 @@
     <email3>email3.1@gmail.com</email3>
     <homepage>www.homepage1.com</homepage>
     <address>address 1</address>
-    <address2>address2  1</address2>
+    <address2>address2 1</address2>
     <group>[none]</group>
   </contact>
   <contact>
@@ -41,37 +41,7 @@
     <email3>email3.2@gmail.com</email3>
     <homepage>www.homepage2.com</homepage>
     <address>address 2</address>
-    <address2>address2  2</address2>
-    <group>[none]</group>
-  </contact>
-  <contact>
-    <firstname>Firstname 3</firstname>
-    <lastname>Lastname 3</lastname>
-    <company>Company 3</company>
-    <homenumber>777 73</homenumber>
-    <mobile>888 83</mobile>
-    <work>999 93</work>
-    <email1>email1.3@gmail.com</email1>
-    <email2>email2.3@gmail.com</email2>
-    <email3>email3.3@gmail.com</email3>
-    <homepage>www.homepage3.com</homepage>
-    <address>address 3</address>
-    <address2>address2  3</address2>
-    <group>[none]</group>
-  </contact>
-  <contact>
-    <firstname>Firstname 4</firstname>
-    <lastname>Lastname 4</lastname>
-    <company>Company 4</company>
-    <homenumber>777 74</homenumber>
-    <mobile>888 84</mobile>
-    <work>999 94</work>
-    <email1>email1.4@gmail.com</email1>
-    <email2>email2.4@gmail.com</email2>
-    <email3>email3.4@gmail.com</email3>
-    <homepage>www.homepage4.com</homepage>
-    <address>address 4</address>
-    <address2>address2  4</address2>
+    <address2>address2 2</address2>
     <group>[none]</group>
   </contact>
 </list>
