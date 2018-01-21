@@ -22,7 +22,7 @@ public class ContactModificationTests extends TestBase {
   }
 
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void testContactModification() {
     ensurePreconditions();
     Contacts before = app.contact().all();

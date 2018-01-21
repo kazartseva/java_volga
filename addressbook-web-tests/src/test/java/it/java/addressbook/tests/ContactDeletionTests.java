@@ -23,7 +23,7 @@ public class ContactDeletionTests extends TestBase {
     }
   }
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void testDeletionContact() {
     ensurePreconditions();
     Contacts before = app.contact().all();

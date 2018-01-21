@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.java.addressbook.tests.ContactCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-01-21T15:41:44" hostname="MacBook-Air-3.local" time="20.767">
+  <properties/>
+  <testcase name="contactCreationTests[0](ContactData{id=0, firstname='Firstname 0', lastname='Lastname 0'})" classname="it.java.addressbook.tests.ContactCreationTests" time="7.529"/>
+  <testcase name="contactCreationTests[1](ContactData{id=0, firstname='Firstname 1', lastname='Lastname 1'})" classname="it.java.addressbook.tests.ContactCreationTests" time="6.504"/>
+  <testcase name="contactCreationTests[2](ContactData{id=0, firstname='Firstname 2', lastname='Lastname 2'})" classname="it.java.addressbook.tests.ContactCreationTests" time="6.732"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

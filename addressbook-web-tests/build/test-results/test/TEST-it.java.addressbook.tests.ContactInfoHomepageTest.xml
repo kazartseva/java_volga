@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.java.addressbook.tests.ContactInfoHomepageTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-01-21T15:42:09" hostname="MacBook-Air-3.local" time="2.108">
+  <properties/>
+  <testcase name="testContactAddress" classname="it.java.addressbook.tests.ContactInfoHomepageTest" time="2.108"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
