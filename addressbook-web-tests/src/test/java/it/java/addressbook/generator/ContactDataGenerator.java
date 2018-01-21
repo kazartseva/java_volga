@@ -1,5 +1,6 @@
 package it.java.addressbook.generator;
 
+import com.beust.jcommander.Parameter;
 import com.thoughtworks.xstream.XStream;
 import it.java.addressbook.models.ContactData;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDataGenerator {
+
 
   public static void main (String[] args) throws IOException {
     int count = Integer.parseInt(args[0]);

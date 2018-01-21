@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.java.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-01-21T18:45:23" hostname="MacBook-Air-3.local" time="2.069">
+  <properties/>
+  <testcase name="testGroupModification" classname="it.java.addressbook.tests.GroupModificationTests" time="2.069"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

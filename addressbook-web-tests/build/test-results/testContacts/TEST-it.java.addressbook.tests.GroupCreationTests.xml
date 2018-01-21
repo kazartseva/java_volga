@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.java.addressbook.tests.GroupCreationTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-01-21T18:45:10" hostname="MacBook-Air-3.local" time="5.785">
+  <properties/>
+  <testcase name="groupCreationTests[0](GroupData{name='test 0', id=2147483647})" classname="it.java.addressbook.tests.GroupCreationTests" time="1.866"/>
+  <testcase name="groupCreationTests[1](GroupData{name='test 1', id=2147483647})" classname="it.java.addressbook.tests.GroupCreationTests" time="2.047"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
