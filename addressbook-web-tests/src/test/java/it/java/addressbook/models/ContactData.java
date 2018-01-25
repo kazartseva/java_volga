@@ -146,8 +146,10 @@ public class ContactData {
     return this;
   }
 
+
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
+
     return this;
   }
 
@@ -246,14 +248,23 @@ public class ContactData {
   }
 
 
-
-
   @Override
   public String toString() {
     return "ContactData{" +
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", company='" + company + '\'' +
+            ", homenumber='" + homenumber + '\'' +
+            ", mobile='" + mobile + '\'' +
+            ", work='" + work + '\'' +
+            ", email1='" + email1 + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", homepage='" + homepage + '\'' +
+            ", address='" + address + '\'' +
+            ", address2='" + address2 + '\'' +
+            ", group='" + group + '\'' +
             '}';
   }
 
@@ -266,7 +277,17 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (company != null ? !company.equals(that.company) : that.company != null) return false;
+    if (homenumber != null ? !homenumber.equals(that.homenumber) : that.homenumber != null) return false;
+    if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+    if (work != null ? !work.equals(that.work) : that.work != null) return false;
+    if (email1 != null ? !email1.equals(that.email1) : that.email1 != null) return false;
+    if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+    if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+    if (homepage != null ? !homepage.equals(that.homepage) : that.homepage != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    return address2 != null ? address2.equals(that.address2) : that.address2 == null;
   }
 
   @Override
@@ -274,7 +295,16 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (company != null ? company.hashCode() : 0);
+    result = 31 * result + (homenumber != null ? homenumber.hashCode() : 0);
+    result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+    result = 31 * result + (work != null ? work.hashCode() : 0);
+    result = 31 * result + (email1 != null ? email1.hashCode() : 0);
+    result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+    result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+    result = 31 * result + (homepage != null ? homepage.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (address2 != null ? address2.hashCode() : 0);
     return result;
   }
-
 }

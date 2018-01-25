@@ -1,9 +1,7 @@
 package it.java.addressbook.generator;
 
-import com.beust.jcommander.Parameter;
 import com.thoughtworks.xstream.XStream;
 import it.java.addressbook.models.ContactData;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,21 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactDataGenerator {
+  public ContactDataGenerator() {
+  }
 
-
-  public static void main (String[] args) throws IOException {
+  public static void main(String[] args) throws IOException {
     int count = Integer.parseInt(args[0]);
     File file = new File(args[1]);
-
     List<ContactData> contacts = generateContacts(count);
     saveAsXml(contacts, file);
   }
 
   private static List<ContactData> generateContacts(int count) {
-    List<ContactData> contacts = new ArrayList<ContactData>();
-    for (int i = 0; i < count; i ++) {
-      contacts.add(new ContactData()
-              .withFirstname(String.format("Firstname %s", i))
+    List<ContactData> contacts = new ArrayList();
+
+    for(int i = 0; i < count; ++i) {
+      contacts.add((new ContactData()).withFirstname(String.format("Firstname %s", i))
               .withLastname(String.format("Lastname %s", i))
               .withCompany(String.format("Company %s", i))
               .withHomeNumber(String.format("777 7%s", i))
@@ -39,18 +37,18 @@ public class ContactDataGenerator {
               .withGroup("[none]")
               .withAddress(String.format("address %s", i))
               .withAddress2(String.format("address2 %s", i))
-      );
+              .withPhoto(new File("src/test/resources/avatar.png")));
     }
+
     return contacts;
   }
-
 
   private static void saveAsXml(List<ContactData> contacts, File file) throws IOException {
     XStream xstream = new XStream();
     xstream.processAnnotations(ContactData.class);
     String xml = xstream.toXML(contacts);
-    try (Writer writer = new FileWriter(file)) {
-      writer.write(xml);
-    }
+    Writer writer = new FileWriter(file);
+    writer.write(xml);
+    writer.close();
   }
 }

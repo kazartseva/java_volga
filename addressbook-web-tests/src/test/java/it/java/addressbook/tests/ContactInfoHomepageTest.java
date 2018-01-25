@@ -4,6 +4,7 @@ import it.java.addressbook.models.ContactData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -14,13 +15,23 @@ public class ContactInfoHomepageTest extends TestBase {
 
   @BeforeMethod
   private void ensurePreconditions() {
-    app.goTo().homePage();
-    if (app.contact().getContactCount() == 0) {
-      app.contact().createAContact(new ContactData().withFirstname("Alessandro").withLastname("Mariani").withCompany("Cinema")
-              .withHomeNumber("777").withMobileNumber("").withWorkNumber("999")
-              .withEmail1("").withEmail2("email2@test.com").withEmail3("email3@test.com")
-              .withHomepage("www.cinema.it").withGroup("[none]")
-              .withAddress("address1").withAddress2("address2"), true);
+    if (app.db().contacts().size() == 0) {
+      app.goTo().homePage();
+      app.contact().createAContact(new ContactData()
+              .withFirstname("Alessandro")
+              .withLastname("Mariani")
+              .withCompany("Cinema")
+              .withHomeNumber("777")
+              .withMobileNumber("")
+              .withWorkNumber("999")
+              .withEmail1("")
+              .withEmail2("email2@test.com")
+              .withEmail3("email3@test.com")
+              .withHomepage("www.cinema.it")
+              .withGroup("[none]")
+              .withAddress("address1")
+              .withAddress2("address2")
+              .withPhoto(new File("src/test/resources/avatar.png")), true);
     }
 
   }
