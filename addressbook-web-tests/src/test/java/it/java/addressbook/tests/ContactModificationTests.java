@@ -25,7 +25,6 @@ public class ContactModificationTests extends TestBase {
               .withEmail2("")
               .withEmail3("email3@test.com")
               .withHomepage("www.cinema.it")
-              .withGroup("[none]")
               .withAddress("address")
               .withAddress2("address2")
               .withPhoto(new File("src/test/resources/avatar.PNG")), true);

@@ -1,5 +1,6 @@
 package it.java.addressbook.appmanager;
 
+import it.java.addressbook.models.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -21,9 +22,15 @@ public class NavigationHelper extends BaseHelper {
   }
 
   public void homePage() {
-    if (isElementPresent(By.id("maintable"))) {
-      return;
-    }
+    //if (isElementPresent(By.id("maintable"))) {
+      //return;
+    //}
     click(By.linkText("home"));
   }
-}
+
+  public void selectedGroupPage(GroupData group) {
+    click(By.cssSelector("select[name='group'] option[value='" + group.getId() + "']"));
+  }
+
+  }
+

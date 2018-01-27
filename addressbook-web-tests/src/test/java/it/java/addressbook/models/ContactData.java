@@ -6,6 +6,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -70,14 +72,15 @@ public class ContactData {
   @Transient
   private String mainAddress;
 
-  @Transient
-  private String group;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups"
+          , joinColumns = @JoinColumn(name = "id")
+          , inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
-
-
 
 
   public ContactData withId(int id) {
@@ -168,11 +171,21 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
+  //добавляет контакту какую-нибудь группу
+  public ContactData inGroup(GroupData group) {
+    if (groups == null) {
+      groups = new HashSet<>();
+    }
+    groups.add(group);
     return this;
   }
 
+  public Groups getGroups() {
+    if (groups == null) {
+      groups = new HashSet<>();
+    }
+    return new Groups(groups);
+  }
 
 
   public int getId() {
@@ -239,10 +252,6 @@ public class ContactData {
     return mainAddress;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
   public File getPhoto() {
     return new File(photo);
   }
@@ -264,7 +273,7 @@ public class ContactData {
             ", homepage='" + homepage + '\'' +
             ", address='" + address + '\'' +
             ", address2='" + address2 + '\'' +
-            ", group='" + group + '\'' +
+            ", groups=" + groups +
             '}';
   }
 
@@ -287,7 +296,8 @@ public class ContactData {
     if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
     if (homepage != null ? !homepage.equals(that.homepage) : that.homepage != null) return false;
     if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    return address2 != null ? address2.equals(that.address2) : that.address2 == null;
+    if (address2 != null ? !address2.equals(that.address2) : that.address2 != null) return false;
+    return groups != null ? groups.equals(that.groups) : that.groups == null;
   }
 
   @Override
@@ -305,6 +315,9 @@ public class ContactData {
     result = 31 * result + (homepage != null ? homepage.hashCode() : 0);
     result = 31 * result + (address != null ? address.hashCode() : 0);
     result = 31 * result + (address2 != null ? address2.hashCode() : 0);
+    result = 31 * result + (groups != null ? groups.hashCode() : 0);
     return result;
   }
+
+
 }

@@ -3,8 +3,9 @@ package it.java.addressbook.tests;
 import com.thoughtworks.xstream.XStream;
 import it.java.addressbook.models.ContactData;
 import it.java.addressbook.models.Contacts;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import it.java.addressbook.models.GroupData;
+import it.java.addressbook.models.Groups;
+import org.testng.annotations.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,11 +36,23 @@ public class ContactCreationTests extends TestBase {
     }
   }
 
+  @BeforeMethod
+  private void ensurePreconditions() {
+    //Проверка и обеспечение предусловий для теста (наличие хотя бы одной группы)
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("Test1").withHeader("Test2").withFooter("Test3"));
+    }
+  }
+
   @Test(dataProvider = "contacts")
   public void contactCreationTests(ContactData contact) {
     app.goTo().homePage();
     Contacts before = app.db().contacts();
-    app.contact().createAContact(contact, true);
+    Groups groups = app.db().groups();
+    File photo = new File("src/test/resources/avatar.png");
+    app.contact().createAContact(contact.inGroup(groups.iterator().next())
+            .withPhoto(photo), true);
     assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(

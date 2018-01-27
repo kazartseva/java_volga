@@ -28,7 +28,6 @@ public class ContactInfoHomepageTest extends TestBase {
               .withEmail2("email2@test.com")
               .withEmail3("email3@test.com")
               .withHomepage("www.cinema.it")
-              .withGroup("[none]")
               .withAddress("address1")
               .withAddress2("address2")
               .withPhoto(new File("src/test/resources/avatar.png")), true);

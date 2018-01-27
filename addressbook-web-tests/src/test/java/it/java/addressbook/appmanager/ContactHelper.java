@@ -2,6 +2,8 @@ package it.java.addressbook.appmanager;
 
 import it.java.addressbook.models.ContactData;
 import it.java.addressbook.models.Contacts;
+import it.java.addressbook.models.GroupData;
+import it.java.addressbook.models.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,7 +38,10 @@ public class ContactHelper extends BaseHelper {
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        //Assert.assertTrue(contactData.getGroups().size() == 0);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -68,10 +73,6 @@ public class ContactHelper extends BaseHelper {
 
   public void confirmSelectedContactsDeletion() {
     wd.switchTo().alert().accept();
-  }
-
-  public boolean isThereAContact() {
-    return (isElementPresent(By.name("selected[]")));
   }
 
   public int getContactCount() {
@@ -166,4 +167,21 @@ public class ContactHelper extends BaseHelper {
   }
 
 
+  public void addToGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    wd.findElement(By.cssSelector("select[name='to_group'] option[value='" + group.getId() + "']")).click();
+    wd.findElement(By.cssSelector("input[value='Add to']")).click();
+    new NavigationHelper(wd).homePage();
+  }
+
+  public boolean isThereAContact(ContactData contact) {
+    return (isElementPresent(By.cssSelector("input[id='" + contact.getId() + "']")));
+  }
+
+
+  public void removeFromGroup(ContactData contact) {
+    selectContactById(contact.getId());
+    wd.findElement(By.cssSelector("input[name='remove']")).click();
+    new NavigationHelper(wd).homePage();
+  }
 }

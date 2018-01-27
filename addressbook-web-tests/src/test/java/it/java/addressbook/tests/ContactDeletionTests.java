@@ -19,9 +19,8 @@ public class ContactDeletionTests extends TestBase {
       app.contact().createAContact(new ContactData().withFirstname("Alessandro").withLastname("Mariani").withCompany("Cinema")
               .withHomeNumber("777").withMobileNumber("888").withWorkNumber("")
               .withEmail1("email1@test.com").withEmail2("").withEmail3("email3@test.com")
-              .withHomepage("www.cinema.it").withGroup("[none]")
-              .withAddress("address").withAddress2("address2")
-              .withGroup("[none]").withPhoto(new File("src/test/resources/avatar.png")), true);
+              .withHomepage("www.cinema.it")
+              .withAddress("address").withAddress2("address2").withPhoto(new File("src/test/resources/avatar.png")), true);
     }
   }
 

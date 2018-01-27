@@ -1,27 +1,32 @@
 <list>
-  <group>
-    <name>test 0</name>
-    <header>header 0</header>
-    <footer>footer 0</footer>
-  </group>
-  <group>
-    <name>test 1</name>
-    <header>header 1</header>
-    <footer>footer 1</footer>
-  </group>
-  <group>
-    <name>test 2</name>
-    <header>header 2</header>
-    <footer>footer 2</footer>
-  </group>
-  <group>
-    <name>test 3</name>
-    <header>header 3</header>
-    <footer>footer 3</footer>
-  </group>
-  <group>
-    <name>test 4</name>
-    <header>header 4</header>
-    <footer>footer 4</footer>
-  </group>
+  <contact>
+    <firstname>Firstname 0</firstname>
+    <lastname>Lastname 0</lastname>
+    <company>Company 0</company>
+    <homenumber>777 70</homenumber>
+    <mobile>888 80</mobile>
+    <work>999 90</work>
+    <email1>email1.0@gmail.com</email1>
+    <email2>email2.0@gmail.com</email2>
+    <email3>email3.0@gmail.com</email3>
+    <homepage>www.homepage0.com</homepage>
+    <address>address 0</address>
+    <address2>address2 0</address2>
+    <photo>src/test/resources/avatar.png</photo>
+  </contact>
+  <contact>
+    <firstname>Firstname 1</firstname>
+    <lastname>Lastname 1</lastname>
+    <company>Company 1</company>
+    <homenumber>777 71</homenumber>
+    <mobile>888 81</mobile>
+    <work>999 91</work>
+    <email1>email1.1@gmail.com</email1>
+    <email2>email2.1@gmail.com</email2>
+    <email3>email3.1@gmail.com</email3>
+    <homepage>www.homepage1.com</homepage>
+    <address>address 1</address>
+    <address2>address2 1</address2>
+    <photo>src/test/resources/avatar.png</photo>
+  </contact>
 </list>

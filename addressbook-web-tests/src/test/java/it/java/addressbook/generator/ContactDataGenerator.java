@@ -34,7 +34,6 @@ public class ContactDataGenerator {
               .withEmail2(String.format("email2.%s@gmail.com", i))
               .withEmail3(String.format("email3.%s@gmail.com", i))
               .withHomepage(String.format("www.homepage%s.com", i))
-              .withGroup("[none]")
               .withAddress(String.format("address %s", i))
               .withAddress2(String.format("address2 %s", i))
               .withPhoto(new File("src/test/resources/avatar.png")));
