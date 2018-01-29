@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactRemoveFromGroupTest extends TestBase{
 
   private void ensurePreconditions() {
@@ -67,17 +70,19 @@ public class ContactRemoveFromGroupTest extends TestBase{
     ContactData selectedContact = contactsOK.iterator().next(); //контакт, подходящий для теста
     GroupData selectedGroup = selectedContact.getGroups().iterator().next(); //одна из его групп
 
-    //идем на страницу выбранной группы
+    //удаляем выбранный контакт
     app.goTo().homePage();
     app.goTo().selectedGroupPage(selectedGroup);
-    Assert.assertTrue(app.contact().isThereAContact(selectedContact));
-
-    //удаляем выбранный контакт
     app.contact().removeFromGroup(selectedContact);
 
-    //проверяем, что удаленного контакта нет на странице группы
-    app.goTo().selectedGroupPage(selectedGroup);
-    Assert.assertFalse(app.contact().isThereAContact(selectedContact));
+    Groups groupsBefore = selectedContact.getGroups();
+    Groups groupsAfter = app.db().contactsSelectedById(selectedContact.getId()).iterator().next().getGroups();
+    assertThat(groupsAfter, equalTo(groupsBefore.without(selectedGroup)));
+
+
+
+
+
 
   }
 

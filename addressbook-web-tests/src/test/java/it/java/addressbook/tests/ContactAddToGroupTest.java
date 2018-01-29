@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactAddToGroupTest extends TestBase {
 
   private void ensurePreconditions() {
@@ -74,22 +77,14 @@ public class ContactAddToGroupTest extends TestBase {
     //Выбираем группу, в которую можно добавить контакт
     GroupData selectedGroup = groupsOK.iterator().next();
 
-    //удостоверяемся, что в выбранной группе нет выбранного контакта
-    app.goTo().homePage();
-    app.goTo().selectedGroupPage(selectedGroup);
-    Assert.assertFalse(app.contact().isThereAContact(modifiedContact));
-
     //Добавляем контакт в группу
     app.goTo().homePage();
     app.contact().addToGroup(modifiedContact, selectedGroup);
 
-    //идем на страницу группы и проверяем наличие добавленного контакта
-    app.goTo().selectedGroupPage(selectedGroup);
-    Assert.assertTrue(app.contact().isThereAContact(modifiedContact));
+    //проверка
+    Groups groupsBefore = modifiedContact.getGroups();
+    Groups groupsAfter = app.db().contactsSelectedById(modifiedContact.getId()).iterator().next().getGroups();
+    assertThat(groupsAfter, equalTo(groupsBefore.withAdded(selectedGroup)));
 
   }
-
 }
-
-
-
