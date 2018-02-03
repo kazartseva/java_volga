@@ -15,9 +15,14 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
   private final Properties properties;
-  WebDriver wd;
-
+  private WebDriver wd;
   private String browser;
+  private RegistrationHelper registrationHelper;
+  private FtpHelper FtpHelper;
+  private MailHelper mailHelper;
+  private JamesHelper JamesHelper;
+  private MantisHelper mantisNavigationHelper;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -35,20 +40,77 @@ public class ApplicationManager {
       wd = new ChromeDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    wd.get(properties.getProperty("web.baseUrl"));
+    dbHelper = new DbHelper();
+
   }
 
   public void stop() {
-    wd.quit();
+    if (wd !=null) {
+      wd.quit();
+    }
+  }
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
   }
 
   public HttpSession newSession() {
     return new HttpSession(this);
   }
 
-  public String getProperty(String key) {
-    return properties.getProperty(key);
+  public RegistrationHelper registration() {
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
   }
+
+  public MantisHelper mantis() {
+    if (mantisNavigationHelper == null) {
+      mantisNavigationHelper = new MantisHelper(this);
+    }
+    return mantisNavigationHelper;
+  }
+
+  public MailHelper mail() {
+    if (mailHelper == null) {
+      mailHelper = new MailHelper(this);
+    }
+    return mailHelper;
+  }
+
+  public JamesHelper james() {
+    if (JamesHelper == null) {
+      JamesHelper = new JamesHelper(this);
+    }
+    return JamesHelper;
+  }
+
+  public FtpHelper ftp() {
+    if (FtpHelper == null) {
+      FtpHelper = new FtpHelper(this);
+    }
+    return FtpHelper;
+  }
+
+  public WebDriver getDriver() {
+    if (wd == null) {
+      if (browser.equals(BrowserType.FIREFOX)) {
+        wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
+      } else if (browser.equals(BrowserType.CHROME)) {
+        wd = new ChromeDriver();
+      }
+      wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      wd.get(properties.getProperty("web.baseUrl"));
+
+    }
+    return wd;
+  }
+
+  public DbHelper db() {
+    return dbHelper;
+  }
+
+
 }
 
