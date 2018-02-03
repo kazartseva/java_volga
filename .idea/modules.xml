@@ -6,14 +6,15 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests2.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests2_main.iml" group="addressbook-web-tests2" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests2_test.iml" group="addressbook-web-tests2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" group="addressbook-web-tests" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" group="addressbook-web-tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis_tests.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis_tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis_tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis_tests_main.iml" group="mantis_tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis_tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis_tests_test.iml" group="mantis_tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_main.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_main.iml" group="sandbox" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox_test.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox_test.iml" group="sandbox" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample_main.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample_main.iml" group="soap-sample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample_test.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample_test.iml" group="soap-sample" />
     </modules>
   </component>
 </project>
