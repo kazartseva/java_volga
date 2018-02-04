@@ -2,7 +2,6 @@ package it.java.mantis.tests;
 
 import it.java.mantis.models.MailMessage;
 import it.java.mantis.models.UserData;
-import it.java.mantis.models.Users;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;

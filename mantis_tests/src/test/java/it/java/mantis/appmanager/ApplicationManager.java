@@ -23,6 +23,7 @@ public class ApplicationManager {
   private JamesHelper JamesHelper;
   private MantisHelper mantisNavigationHelper;
   private DbHelper dbHelper;
+  private SoapHelper soap;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -33,15 +34,6 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-    if (browser.equals(BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-    } else if (browser.equals(BrowserType.CHROME)) {
-      wd = new ChromeDriver();
-    }
-
-    dbHelper = new DbHelper();
-
   }
 
   public void stop() {
@@ -86,6 +78,13 @@ public class ApplicationManager {
     return JamesHelper;
   }
 
+  public SoapHelper soap() {
+    if (soap == null) {
+      soap = new SoapHelper(this);
+    }
+    return soap;
+  }
+
   public FtpHelper ftp() {
     if (FtpHelper == null) {
       FtpHelper = new FtpHelper(this);
@@ -108,6 +107,9 @@ public class ApplicationManager {
   }
 
   public DbHelper db() {
+    if (dbHelper == null) {
+    dbHelper = new DbHelper();
+    }
     return dbHelper;
   }
 

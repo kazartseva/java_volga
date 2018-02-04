@@ -12,7 +12,8 @@ import java.util.List;
 
 public class DbHelper {
 
-  private final SessionFactory sessionFactory;
+  private SessionFactory sessionFactory;
+  private ApplicationManager app;
 
 
   public DbHelper() {
@@ -21,6 +22,10 @@ public class DbHelper {
             .configure() // configures settings from hibernate.cfg.xml
             .build();
     sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+  }
+
+  public DbHelper(ApplicationManager app) {
+    this.app = app;
   }
 
   public Users users() {
