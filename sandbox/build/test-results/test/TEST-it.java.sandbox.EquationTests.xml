@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.java.sandbox.EquationTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-02-06T19:12:16" hostname="MacBook-Air-3.local" time="0.006">
+  <properties/>
+  <testcase name="test0" classname="it.java.sandbox.EquationTests" time="0.002"/>
+  <testcase name="test1" classname="it.java.sandbox.EquationTests" time="0.001"/>
+  <testcase name="test3" classname="it.java.sandbox.EquationTests" time="0.001"/>
+  <testcase name="testConstant" classname="it.java.sandbox.EquationTests" time="0.001"/>
+  <testcase name="testLinear" classname="it.java.sandbox.EquationTests" time="0.0"/>
+  <testcase name="testZero" classname="it.java.sandbox.EquationTests" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
