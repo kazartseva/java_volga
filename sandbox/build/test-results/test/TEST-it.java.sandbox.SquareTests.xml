@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.java.sandbox.SquareTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-02-05T23:13:35" hostname="MacBook-Air-3.local" time="0.0">
+  <properties/>
+  <testcase name="testArea" classname="it.java.sandbox.SquareTests" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
