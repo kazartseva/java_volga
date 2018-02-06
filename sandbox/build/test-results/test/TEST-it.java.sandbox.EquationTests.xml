@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="it.java.sandbox.EquationTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-02-06T17:45:26" hostname="MacBook-Air-3.local" time="0.005">
+<testsuite name="it.java.sandbox.EquationTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-02-06T18:06:51" hostname="MacBook-Air-3.local" time="0.005">
   <properties/>
-  <testcase name="test0" classname="it.java.sandbox.EquationTests" time="0.001"/>
+  <testcase name="test0" classname="it.java.sandbox.EquationTests" time="0.0"/>
   <testcase name="test1" classname="it.java.sandbox.EquationTests" time="0.0"/>
   <testcase name="test3" classname="it.java.sandbox.EquationTests" time="0.0"/>
   <testcase name="testConstant" classname="it.java.sandbox.EquationTests" time="0.0"/>
