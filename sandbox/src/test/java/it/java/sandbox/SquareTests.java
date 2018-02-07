@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class SquareTests {
 @Test
   public void testArea () {
-    Square s = new Square (4);
+    Square s = new Square (5);
   Assert.assertEquals(s.area(),16.00);
   }
 
