@@ -46,6 +46,7 @@ public class ApplicationManager {
       } else if (browser.equals(BrowserType.CHROME)) {
         wd = new ChromeDriver();
       }
+
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
